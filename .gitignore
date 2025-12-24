@@ -1,0 +1,22 @@
+# IDE / Workspace settings
+.clang-format
+.clangd
+.cproject
+.project
+.settings/
+
+# Compiled files
+*.o
+*.elf
+*.bin
+*.hex
+*.map
+
+# Build directories
+build/
+Debug/
+Release/
+
+# OS system files
+Thumbs.db
+.DS_Store
