@@ -1,11 +1,11 @@
-#include "i2c_driver.h"
+#include "i2c.h"
 
 #if I2C_ENABLED == STD_ON
 
 #include "esp_log.h"
 
 // Debug TAG
-static const char *TAG = "I2C_DRIVER";
+static const char *TAG = TAG_I2C;
 
 // Global I2C port
 static i2c_port_t g_I2c_Port;

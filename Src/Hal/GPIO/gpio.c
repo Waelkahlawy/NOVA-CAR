@@ -1,9 +1,9 @@
-#include "gpio_driver.h"  // Include GPIO driver header
+#include "gpio.h"  // Include GPIO driver header
 
 #if GPIO_ENABLED == STD_ON // GPIO_ENABLED
 
 
-static const char *TAG = "GPIO_DRIVER";
+static const char *TAG = TAG_GPIO ;
 
 void Gpio_InitPin(Gpio_ConfigType *pinConfig)
 {

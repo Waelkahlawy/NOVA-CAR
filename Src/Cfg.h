@@ -10,12 +10,13 @@
 #define TAG_GPIO        "GPIO_DRIVER"
 #define TAG_ADC         "ADC_DRIVER"
 #define TAG_I2C         "I2C_DRIVER"
-
+#define TAG_UART        "UART_DRIVER"
 
 // Enable or disable drivers
 #define GPIO_ENABLED            STD_ON
 #define ADC_ENABLED             STD_ON
 #define I2C_ENABLED             STD_ON
+#define UART_ENABLED            STD_ON
 
 // Enable or disable debug logs for drivers
 // GPIO Debugging
@@ -26,13 +27,16 @@
 #if ADC_ENABLED == STD_ON
 #define ADC_DEBUG_ENABLED       STD_ON
 #endif 
-
+// I2C Debugging
 #if I2C_ENABLED == STD_ON
 
 #define I2C_DEBUG_ENABLED       STD_ON
 
 #endif
-
+// UART Debugging
+#if UART_ENABLED == STD_ON
+#define UART_DEBUG_ENABLED      STD_ON
+#endif
 
 
 

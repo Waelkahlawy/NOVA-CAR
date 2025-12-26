@@ -1,7 +1,7 @@
 #ifndef GPIO_H   // GPIO_H
 #define GPIO__H // GPIO_H
 
-#include "config_file.h" // Include project configuration
+#include "../../Cfg.h" // Include project configuration
 
 #if GPIO_ENABLED == STD_ON // Enable GPIO driver
 

@@ -1,7 +1,7 @@
 #ifndef I2C_H
 #define I2C_H
 
-#include "config_file.h"
+#include "../../Cfg.h"
 
 #if I2C_ENABLED == STD_ON
 
