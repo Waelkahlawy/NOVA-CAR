@@ -5,8 +5,6 @@
 
 static const char *TAG = "GPIO_DRIVER";
 
-==============================================================================================*/
-
 void Gpio_InitPin(Gpio_ConfigType *pinConfig)
 {
 #if GPIO_ENABLED == STD_ON
