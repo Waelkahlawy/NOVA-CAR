@@ -1,10 +1,10 @@
 #ifndef GPIO_H   // GPIO_H
-#define GPIO__H // GPIO_H
+#define GPIO_H // GPIO_H
 
-#include "../../Cfg.h" // Include project configuration
 
 #if GPIO_ENABLED == STD_ON // Enable GPIO driver
 
+#include "../../Cfg.h" // Include project configuration
 #include "driver/gpio.h"   // GPIO driver header
 
 

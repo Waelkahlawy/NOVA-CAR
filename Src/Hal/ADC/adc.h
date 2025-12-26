@@ -1,10 +1,10 @@
-#ifndef ADC_DRIVER_H
-#define ADC_DRIVER_H
+#ifndef ADC_H
+#define ADC_H
 
-#include "config_file.h"
 
 #if ADC_ENABLED == STD_ON
 
+#include "config_file.h"
 #include "driver/adc.h"
 
 
@@ -16,8 +16,6 @@ typedef struct {
 
 
 void Adc_Init(Adc_ConfigType *configurations);
-
-
 uint32_t Adc_ReadValue(adc_channel_t channel);
 
 #endif 
