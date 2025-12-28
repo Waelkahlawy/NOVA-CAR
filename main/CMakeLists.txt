@@ -10,7 +10,7 @@ idf_component_register(
         "../Src/Hal/UART/uart.c"    # list the source files of this component
         "../Src/Hal/WIFI/wifi.c"    # list the source files of this component
         "../Src/App/IMU/imu.c" 
-        "../Src/Hal/MQTT/mqtt.c"      # list the source files of this component
+        "../Src/App/MQTT/mqtt.c"      # list the source files of this component
                                          # list the source files of this component
     INCLUDE_DIRS 
         "."
@@ -19,7 +19,7 @@ idf_component_register(
         "../Src/Hal/I2C"    
         "../Src/Hal/UART"
         "../Src/Hal/WIFI"
-        "../Src/Hal/MQTT"
+        "../Src/App/MQTT"
         "../Src/App/IMU/"
 
                 # optional, add here public include directories
