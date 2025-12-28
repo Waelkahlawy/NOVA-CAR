@@ -5,23 +5,9 @@
 //------------------Standard definitions-------------//
 #define STD_ON      1 // Enabled
 #define STD_OFF     0   // Disabled
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
- 
+
 // Tags for logging
-=======
 
-//------------------Tags for Hal logging------------//
->>>>>>> cf08a02df6ca5a265fda952ad4a93d10d2438acd
-=======
-
-//------------------Tags for Hal logging------------//
->>>>>>> cf08a02df6ca5a265fda952ad4a93d10d2438acd
-=======
-
-//------------------Tags for Hal logging------------//
->>>>>>> cf08a02df6ca5a265fda952ad4a93d10d2438acd
 #define TAG_GPIO        "GPIO_DRIVER"
 #define TAG_ADC         "ADC_DRIVER"
 #define TAG_I2C         "I2C_DRIVER"
@@ -32,22 +18,13 @@
 #define TAG_LDR         "LDR_SENSOR"
 
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-
-
-=======
->>>>>>> cf08a02df6ca5a265fda952ad4a93d10d2438acd
-=======
->>>>>>> cf08a02df6ca5a265fda952ad4a93d10d2438acd
 //------------------Enable or disable Hal drivers------------//
 #define GPIO_ENABLED            STD_ON
 #define ADC_ENABLED             STD_ON
 #define I2C_ENABLED             STD_ON
 #define UART_ENABLED            STD_ON
 #define WIFI_ENABLED            STD_ON
-<<<<<<< HEAD
 #define IMU_ENABLED             STD_ON
 #define MQTT_ENABLED            STD_ON
 #define LDR_ENABLED             STD_ON
@@ -55,20 +32,11 @@
 
 //------------------Enable or disable App drivers------------//
 #define ULTRASONIC_ENABLED  STD_ON
-<<<<<<< HEAD
->>>>>>> cf08a02df6ca5a265fda952ad4a93d10d2438acd
 
 //------------------Enable or disable App drivers------------//
 #define ULTRASONIC_ENABLED  STD_ON
 
-<<<<<<< HEAD
-=======
 
->>>>>>> cf08a02df6ca5a265fda952ad4a93d10d2438acd
-=======
-
-
->>>>>>> cf08a02df6ca5a265fda952ad4a93d10d2438acd
 //------------------Enable or disable debug logs for Hal drivers------------//
 // GPIO Debugging
 #if GPIO_ENABLED == STD_ON
@@ -86,7 +54,6 @@
 #if UART_ENABLED == STD_ON
 #define UART_DEBUG_ENABLED      STD_ON
 #endif
-<<<<<<< HEAD
 =======
 
 //------------------Enable or disable debug logs for App drivers------------//
@@ -95,23 +62,13 @@
 #define ULTRASONIC_DEBUG_ENABLED      STD_ON
 #endif
 
-//------------------ Hal driver configration------------//
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> cf08a02df6ca5a265fda952ad4a93d10d2438acd
-=======
->>>>>>> cf08a02df6ca5a265fda952ad4a93d10d2438acd
-=======
->>>>>>> cf08a02df6ca5a265fda952ad4a93d10d2438acd
+
 #if WIFI_ENABLED == STD_ON
 #define WIFI_SSID               "WAEL"
 #define WIFI_PASSWORD           "Null@987897"
 #define WIFI_DEBUG_ENABLED      STD_ON
 #endif
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 #if IMU_ENABLED == STD_ON
 #define IMU_DEBUG_ENABLED       STD_ON
 // MPU6050 I2C Address
