@@ -18,6 +18,8 @@
 #define TAG_LDR         "LDR_SENSOR"
 
 
+//------------------Tags for App logging------------//
+#define TAG_ULTRASONIC   "ULTRASONIC_DRIVER"
 
 //------------------Enable or disable Hal drivers------------//
 #define GPIO_ENABLED            STD_ON
@@ -61,11 +63,24 @@
 #endif
 
 
+//------------------ Hal driver configration------------//
+//WIFI
 #if WIFI_ENABLED == STD_ON
 #define WIFI_SSID               "WAEL"
 #define WIFI_PASSWORD           "Null@987897"
 #define WIFI_DEBUG_ENABLED      STD_ON
 #endif
+//UART
+#if UART_ENABLED == STD_ON
+#define UART_BAUD_RATE      9600   
+#define UART_FRAME_LENGTH   UART_DATA_8_BITS          
+#define UART_PARITY_CHECK   UART_PARITY_DISABLE
+#define UART_STOP_BIT       UART_STOP_BITS_1
+#define UART_FLOW_CTRL      UART_HW_FLOWCTRL_DISABLE
+#define UART_SOURCE_CLK      UART_SCLK_DEFAULT
+#endif
+
+
 
 #if IMU_ENABLED == STD_ON
 #define IMU_DEBUG_ENABLED       STD_ON
@@ -109,8 +124,9 @@
 
 //------------------ App driver configration------------//
 //Ultrasonic config
+#if ULTRASONIC_ENABLED == STD_ON
 #define ULTRASONIC_SOUND_SPEED_CM_PER_US   (0.034f)
 #define ULTRASONIC_DIV_FACTOR              (2.0f)
-
+#endif
 
 #endif 
