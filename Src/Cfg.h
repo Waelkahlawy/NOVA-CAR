@@ -28,7 +28,6 @@
 #define IMU_ENABLED             STD_ON
 #define MQTT_ENABLED            STD_ON
 #define LDR_ENABLED             STD_ON
-=======
 
 //------------------Enable or disable App drivers------------//
 #define ULTRASONIC_ENABLED  STD_ON
@@ -54,7 +53,6 @@
 #if UART_ENABLED == STD_ON
 #define UART_DEBUG_ENABLED      STD_ON
 #endif
-=======
 
 //------------------Enable or disable debug logs for App drivers------------//
 // Ultrasonic Debugging
@@ -109,42 +107,10 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-=======
-=======
->>>>>>> cf08a02df6ca5a265fda952ad4a93d10d2438acd
-=======
->>>>>>> cf08a02df6ca5a265fda952ad4a93d10d2438acd
 //------------------ App driver configration------------//
 //Ultrasonic config
 #define ULTRASONIC_SOUND_SPEED_CM_PER_US   (0.034f)
 #define ULTRASONIC_DIV_FACTOR              (2.0f)
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> cf08a02df6ca5a265fda952ad4a93d10d2438acd
-=======
->>>>>>> cf08a02df6ca5a265fda952ad4a93d10d2438acd
-=======
->>>>>>> cf08a02df6ca5a265fda952ad4a93d10d2438acd
-
 
 
 #endif 
