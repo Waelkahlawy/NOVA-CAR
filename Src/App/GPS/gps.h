@@ -2,6 +2,8 @@
 #ifndef GPS_H_
 #define GPS_H_
 
+#define GPS_ENABLED   STD_ON
+
 #if GPS_ENABLED == STD_ON
 
     /* LIBs INCLUSION */
@@ -29,17 +31,18 @@
 
     typedef struct
     {
-        uint32_t Hour;
-        uint32_t Min;
-        uint32_t Sec;
+        uint8_t Hour;
+        uint8_t Min;
+        uint8_t Sec;
     }GPS_Time_t;
 
     /* GPS RECIVED BUFFER SIZE Based On Full NMEA Sentences*/
     #define BUFFER_SIZE     128
 
-
+    /* CAIRO TIME ZONE */
     #define CAIRO_TIMEZONE       2
 
+    /* Knots To Kmh Conversion Factor  */
     #define KnotsToKmh_ConversionFactor 1.852
 
 
