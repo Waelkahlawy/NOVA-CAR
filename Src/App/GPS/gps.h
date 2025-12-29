@@ -17,6 +17,14 @@
     #include "esp_log.h"
     #include "../../Hal/UART/uart.h"
 
+    /* GPS RECIVED BUFFER SIZE Based On Full NMEA Sentences*/
+    #define BUFFER_SIZE     128
+
+    /* CAIRO TIME ZONE */
+    #define CAIRO_TIMEZONE       2
+
+    /* Knots To Kmh Conversion Factor  */
+    #define KnotsToKmh_ConversionFactor 1.852
 
     /* GPS LOCATION DATA TYPE */
     typedef struct 
@@ -35,17 +43,6 @@
         uint8_t Min;
         uint8_t Sec;
     }GPS_Time_t;
-
-    /* GPS RECIVED BUFFER SIZE Based On Full NMEA Sentences*/
-    #define BUFFER_SIZE     128
-
-    /* CAIRO TIME ZONE */
-    #define CAIRO_TIMEZONE       2
-
-    /* Knots To Kmh Conversion Factor  */
-    #define KnotsToKmh_ConversionFactor 1.852
-
-
 
     void GPS_Init   (const Uart_ConfigType *UART_Config);
     void GPS_GetData(Gps_Parameters_t *GPS_Parametars);
