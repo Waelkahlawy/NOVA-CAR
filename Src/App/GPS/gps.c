@@ -1,12 +1,10 @@
 #include <stdint.h>
 #include <stdio.h>
-#include <stdbool.h>
 #include <sys/_intsup.h>
 #include <unistd.h>
 #include "../../Hal/UART/uart.h"
 #include "esp_err.h"
 #include "freertos/idf_additions.h"
-#include "hal/uart_types.h"
 #include "portmacro.h"
 #include "esp_log.h"
 #include "string.h"
@@ -46,7 +44,6 @@ void GPS_GetData (Gps_Parameters_t *GPS_Parametars)
     float   Speed_Knots , CourseDirection;
     GPS_Time_t Time;
 
-    /* raw_nmea(void) */
     memset(GPS_BUFFER , 0 , BUFFER_SIZE);                   /* Clears the global buffer to ensure no old data remains */
     Uart_Read(GPS_BUFFER , BUFFER_SIZE , portMAX_DELAY );   /* Read The Recived Data from GPS */
     ESP_LOGI(TAG , "%s" , GPS_BUFFER);
@@ -64,7 +61,7 @@ void GPS_GetData (Gps_Parameters_t *GPS_Parametars)
     start = strstr(GPS_BUFFER , "$GPRMC");
     if (start != NULL)
     {
-        Validation  = sscanf(start , "$GPRMC,%10[^,],%c,%*[^,],%*[^,],%*[^,],%*[^,],%f,%f" , Timestamp, &Status, &Speed_Knots, &CourseDirection);  /* sscanf logic: ( $GPGGA - Match header ) , ( %*f - Skip Time ) , ( %11[^,],%*c - Capture Lat, Skip 'N/S') , ( %11[^,],%*c - Capture Lon Skip 'E/W' ) , ( %*d - Skip Fix Quality ) , ( %*d - Skip Satellites ) , ( %*f - Skip HDOP ) , ( %11[^,] - Capture Altitude )*/ 
+        Validation = sscanf(start , "$GPRMC,%10[^,],%c,%*[^,],%*[^,],%*[^,],%*[^,],%f,%f" , Timestamp, &Status, &Speed_Knots, &CourseDirection);  /* sscanf logic: ( $GPGGA - Match header ) , ( %*f - Skip Time ) , ( %11[^,],%*c - Capture Lat, Skip 'N/S') , ( %11[^,],%*c - Capture Lon Skip 'E/W' ) , ( %*d - Skip Fix Quality ) , ( %*d - Skip Satellites ) , ( %*f - Skip HDOP ) , ( %11[^,] - Capture Altitude )*/ 
         switch(Validation)
         {
             case 'A':

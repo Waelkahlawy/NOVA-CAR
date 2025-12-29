@@ -7,12 +7,10 @@
 #if GPS_ENABLED == STD_ON
 
     /* LIBs INCLUSION */
-    #include <stdio.h>
+    #include <stdint.h>
     #include <sys/_intsup.h>
-    #include "driver/ledc.h"
     #include "esp_err.h"
     #include "freertos/FreeRTOS.h"
-    #include "hal/ledc_types.h"
     #include "portmacro.h"
     #include "esp_log.h"
     #include "../../Hal/UART/uart.h"
