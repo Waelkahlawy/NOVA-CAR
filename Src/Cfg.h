@@ -18,6 +18,8 @@
 #define TAG_LDR         "LDR_SENSOR"
 
 
+//------------------Tags for App logging------------//
+#define TAG_ULTRASONIC   "ULTRASONIC_DRIVER"
 
 //------------------Enable or disable Hal drivers------------//
 #define GPIO_ENABLED            STD_ON
