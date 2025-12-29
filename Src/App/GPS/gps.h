@@ -1,6 +1,9 @@
+/* gps.h FILE GAURD */
 #ifndef GPS_H_
 #define GPS_H_
 
+
+/* LIBs INCLUSION */
 #include <stdio.h>
 #include <sys/_intsup.h>
 #include "driver/ledc.h"
@@ -12,7 +15,7 @@
 #include "../../Hal/UART/uart.h"
 
 
-
+/* GPS LOCATION DATA TYPE */
 typedef struct 
 {
     float Latitude;
