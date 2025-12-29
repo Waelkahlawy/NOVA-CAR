@@ -17,6 +17,7 @@
 #define TAG_MQTT        "MQTT_DRIVER"
 #define TAG_LDR         "LDR_SENSOR"
 #define TAG_ULTRASONIC  "ULTRASONIC_DRIVER"
+#define TAG_DHT11       "DHT11"
 
 //------------------Enable or disable Hal drivers------------//
 #define GPIO_ENABLED            STD_ON
@@ -31,6 +32,7 @@
 #define MQTT_ENABLED            STD_ON
 #define LDR_ENABLED             STD_ON
 #define ULTRASONIC_ENABLED      STD_ON
+#define DHT11_ENABLED           STD_ON
 
 
 //------------------Configuration & Debugging Options APP Drivers------------//
@@ -82,7 +84,15 @@
 
 #endif // IMU_ENABLED
 
+// DHT11 Sensor Configuration
+#if DHT11_ENABLED == STD_ON
+#define DHT11_DEBUG_ENABLED     STD_ON
+#define DHT11_GPIO_PIN          GPIO_NUM_4            // GPIO pin connected to DHT11 data line
+#define DHT11_GPIO_MODE         GPIO_MODE_OUTPUT_OD    // Open-drain output
+#define DHT11_GPIO_INITIAL_VAL  1                     // Initial state: high (pull-up)
+#define DHT11_GPIO_PULL         GPIO_PULLUP_ONLY      // Internal pull-up (external 4.7k-10k resistor recommended)
 
+#endif
 //------------------Configuration & Debugging Options HAL Drivers------------//
 
 // WIFI Configuration & Debugging
@@ -103,6 +113,25 @@
 #define UART_SOURCE_CLK         UART_SCLK_DEFAULT           // Default source clock
 
 #endif
+
+#if I2C_ENABLED == STD_ON
+#define I2C_DEBUG_ENABLED       STD_ON
+
+#endif
+
+#if ADC_ENABLED == STD_ON
+#define ADC_DEBUG_ENABLED       STD_ON  
+
+#if GPIO_ENABLED == STD_ON
+#define GPIO_DEBUG_ENABLED      STD_ON
+#define HIGH                    1
+#define LOW                     0
+
+#endif
+
+
+
+
 
 
 
