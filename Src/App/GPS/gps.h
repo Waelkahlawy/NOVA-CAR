@@ -9,6 +9,17 @@
 #include "hal/ledc_types.h"
 #include "portmacro.h"
 #include "esp_log.h"
+#include "../../Hal/UART/uart.h"
+
+
+
+typedef struct 
+{
+    float Latitude;
+    float Longitude;
+    float Altitude;
+}Gps_Location_t;
+
 
 
 void GPS_Init   (void);
