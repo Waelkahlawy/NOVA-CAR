@@ -13,7 +13,8 @@ idf_component_register(
         "../Src/App/IMU/imu.c" 
         "../Src/App/MQTT/mqtt.c"       
         "../Src/App/LDR/ldr.c" 
-        "../Src/App/Ultrasonic/ultrasonic.c"     
+        "../Src/App/Ultrasonic/ultrasonic.c"   
+        "../Src/App/DHT11/dht11.c"  
 
     INCLUDE_DIRS 
         # List the include directories of this component here
@@ -27,6 +28,7 @@ idf_component_register(
         "../Src/App/IMU/"
         "../Src/App/LDR"
         "../Src/App/Ultrasonic"
+        "../Src/App/DHT11"
                         
 
                 # optional, add here public include directories
