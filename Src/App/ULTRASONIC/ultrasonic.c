@@ -6,6 +6,8 @@
 #include "rom/ets_sys.h"
 #include "esp_attr.h"
 
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
 
 static const char *g_TAG = TAG_ULTRASONIC ; // Debug TAG
 
@@ -68,11 +70,11 @@ void Ultrasonic_Main(float *Distance)
     /* Trigger pulse */
     g_Trig_Pin.pin_value = 0;
     Gpio_WritePinValue(&g_Trig_Pin);
-    ets_delay_us(2);
+    vTaskDelay(pdMS_TO_TICKS(2)); 
 
     g_Trig_Pin.pin_value = 1;
     Gpio_WritePinValue(&g_Trig_Pin);
-    ets_delay_us(10);
+    vTaskDelay(pdMS_TO_TICKS(10)); 
 
     g_Trig_Pin.pin_value = 0;
     Gpio_WritePinValue(&g_Trig_Pin);
