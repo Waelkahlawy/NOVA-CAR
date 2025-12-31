@@ -667,10 +667,3 @@ For questions and support:
 
 ---
 
-## 🌟 Star History
-
-If you find this project useful, please consider giving it a ⭐!
-
-[![Star History Chart](https://api.star-history.com/svg?repos=yourusername/driver-monitor&type=Date)](https://star-history.com/#yourusername/driver-monitor&Date)
-
----
