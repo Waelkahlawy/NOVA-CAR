@@ -31,5 +31,4 @@ float Imu_GetGyroMagnitude(void);                                           // G
 float Imu_GetAccelMagnitude(void);                                          // Get accelerometer magnitude                
 
 #endif // IMU_ENABLED
-
 #endif // IMU_H

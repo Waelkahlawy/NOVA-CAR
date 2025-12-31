@@ -56,7 +56,7 @@ void Imu_Main(Imu_DataType *data)
     data->gyro_x = (int16_t)(((g_raw_data[8] << 8) | g_raw_data[9]));
     data->gyro_y = (int16_t)((g_raw_data[10] << 8) | g_raw_data[11]);
     data->gyro_z = (int16_t)((g_raw_data[12] << 8) | g_raw_data[13]);
-
+        // for calabration
     data->accel_x = ((float)data->accel_x / ACCEL_SENS_2G) - IMU_AX_OFFSET;
     data->accel_y = ((float)data->accel_y / ACCEL_SENS_2G) - IMU_AY_OFFSET;
     data->accel_z = ((float)data->accel_z / ACCEL_SENS_2G) - IMU_AZ_OFFSET;
