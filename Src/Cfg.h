@@ -6,7 +6,7 @@
 #define STD_ON      1 // Enabled
 #define STD_OFF     0   // Disabled
 
-// Tags for logging
+//------------------Tags for logging -------------//
 
 #define TAG_GPIO        "GPIO_DRIVER"
 #define TAG_ADC         "ADC_DRIVER"
@@ -39,7 +39,7 @@
 
 
 //------------------Configuration & Debugging Options APP Drivers------------//
- 
+
 // MQTT Configuration & Debugging
 #if MQTT_ENABLED == STD_ON
 #define MQTT_DEBUG_ENABLED      STD_ON
@@ -60,15 +60,16 @@
 #define LDR_MAX_VALUE           4095                // Bright (raw ADC)
 #define LDR_MIN_LIGHT           0                   // Mapped: Dark = 0%
 #define LDR_MAX_LIGHT           100                 // Mapped: Bright = 100%
-
 #endif
 
 // Ultrasonic Configuration & Debugging
 #if ULTRASONIC_ENABLED == STD_ON
 #define ULTRASONIC_DEBUG_ENABLED           STD_ON  // Enable Ultrasonic debug logs
+#define TRIGGER_GPIO_PIN                    5
+#define ECHO_GPIO_PIN                       18
 #define ULTRASONIC_SOUND_SPEED_CM_PER_US   (0.034f)     // Speed of sound in cm/us
 #define ULTRASONIC_DIV_FACTOR              (2.0f)   // Division factor for distance calculation
-
+#define ULTRASONIC_TIMEOUT_US              (30000U)
 #endif
 
 // IMU Configuration & Debugging
@@ -80,9 +81,9 @@
 #define MPU6050_ADDR           0x68          // Default I2C address
 // MPU6050 Registers
 #define MPU6050_PWR_MGMT_1     0x6B         // Power Management register
-#define MPU6050_WHO_AM_I       0x75         // Who Am I register   
+#define MPU6050_WHO_AM_I       0x75         // Who Am I register
 #define MPU6050_ACCEL_XOUT_H   0x3B         // Accelerometer data register
-#define MPU6050_GYRO_XOUT_H    0x43         // Gyroscope data register   
+#define MPU6050_GYRO_XOUT_H    0x43         // Gyroscope data register
 #define MPU6050_TEMP_OUT_H     0x41         // Temperature data register
 #define ACCEL_SENS_2G          16384.0f     // LSB/g
 #define GYRO_SENS_250DPS       131.0f       // LSB/(deg/s)
@@ -164,8 +165,5 @@
 #endif
 
 
-
-
-
-
+#endif // CFG_H
 #endif 
