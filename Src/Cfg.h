@@ -60,6 +60,7 @@
 #define LDR_MAX_VALUE           4095                // Bright (raw ADC)
 #define LDR_MIN_LIGHT           0                   // Mapped: Dark = 0%
 #define LDR_MAX_LIGHT           100                 // Mapped: Bright = 100%
+
 #endif
 
 // Ultrasonic Configuration & Debugging
@@ -106,6 +107,7 @@
 #define DHT11_GPIO_PIN          GPIO_NUM_4  
 #define DHT11_MAX_RETRIES       3                  // Number of read retries
 #define DHT11_DEBUG_ENABLED     STD_ON
+
 #endif
 
 
@@ -117,6 +119,7 @@
 #define GPS_BAUD_RATE           9600                // SIM808 GPS baud rate
 #define GPS_BUFFER_SIZE         512                 // GPS data buffer size
 #define GPS_DEBUG_ENABLED       STD_ON
+
 #endif
 
 #if GSM_ENABLED == STD_ON
@@ -155,15 +158,14 @@
 
 #if ADC_ENABLED == STD_ON
 #define ADC_DEBUG_ENABLED       STD_ON  
+#endif
 
 #if GPIO_ENABLED == STD_ON
 #define GPIO_DEBUG_ENABLED      STD_OFF 
 #define HIGH                    1
 #define LOW                     0
-
-#endif
 #endif
 
 
 #endif // CFG_H
-#endif 
+
