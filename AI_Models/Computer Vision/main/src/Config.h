@@ -21,12 +21,12 @@
 
 // --- System Settings ---
 #define SYS_BAUD_RATE           115200
-#define CFG_WIFI_SSID           "DESKTOP-UC4MCI1 1119"
-#define CFG_WIFI_PASS           "L279<10g"
+#define CFG_WIFI_SSID           ""
+#define CFG_WIFI_PASS           ""
 
 // --- Telegram Settings ---
-#define CFG_TG_BOT_TOKEN        "8571433290:AAHjToBjkHj84rhQRa3vzYjJmG_gMlQvNS8"
-#define CFG_TG_CHAT_ID          "5708590934"
+#define CFG_TG_BOT_TOKEN        ""
+#define CFG_TG_CHAT_ID          ""
 // --- AI Model Source ---
 // 1 = From Header (Flash), 0 = From SD Card
 #define MODEL_FROM_HEADER       0  
