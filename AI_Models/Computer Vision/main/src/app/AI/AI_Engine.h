@@ -13,6 +13,7 @@ struct AIResult {
     const char* label;
     float score;
     bool valid;
+    int index; 
 };
 
 class AIEngine {
@@ -25,7 +26,6 @@ private:
     TfLiteTensor* input = nullptr;
     TfLiteTensor* output = nullptr;
     
- 
     uint8_t *tensor_arena = nullptr;
     uint8_t *model_data = nullptr; 
     

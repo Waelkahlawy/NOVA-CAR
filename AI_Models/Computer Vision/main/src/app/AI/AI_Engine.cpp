@@ -122,9 +122,9 @@ void AIEngine::preprocess(camera_fb_t* fb) {
 }
 
 AIResult AIEngine::run(camera_fb_t* fb) {
-    if (!fb) return {"", 0, false};
+    if (!fb) return {"", 0, false, -1}; 
     preprocess(fb);
-    if (interpreter->Invoke() != kTfLiteOk) return {"Error", 0, false};
+    if (interpreter->Invoke() != kTfLiteOk) return {"Error", 0, false, -1};
 
     int8_t* out_data = output->data.int8;
     float max_score = 0;
@@ -137,8 +137,9 @@ AIResult AIEngine::run(camera_fb_t* fb) {
     }
 
     if (max_score > CFG_AI_CONF_THRESH) {
-        return {kLabels[best_idx], max_score * 100, true};
+       
+        return {kLabels[best_idx], max_score * 100, true, best_idx};
     }
-    return {"Unknown", max_score * 100, false};
+    return {"Unknown", max_score * 100, false, -1};
 }
 #endif
