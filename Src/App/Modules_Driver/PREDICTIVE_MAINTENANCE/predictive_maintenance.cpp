@@ -30,7 +30,7 @@ static uint8_t tensor_arena[kTensorArenaSize] __attribute__((aligned(16)));
 static tflite::MicroInterpreter* interpreter = nullptr;
 
 // Feature collection window
-#define WINDOW_SIZE 50
+#define WINDOW_SIZE 200
 static Imu_DataType imu_window[WINDOW_SIZE];
 
 void Predictive_Maintenance_Init(void)
@@ -75,7 +75,7 @@ static void compute_features(Predictive_FeaturesType* features)
     int i, j;
 
     for (i = 0; i < WINDOW_SIZE; i++) {
-        Imu_Main(&imu_window[i]);
+        Imu_Main(&imu_window[i], MPU6050_ADDR2 );
     }
 
     float magnitudes[WINDOW_SIZE];

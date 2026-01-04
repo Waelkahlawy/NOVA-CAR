@@ -127,6 +127,44 @@ void Mqtt_Publish(const char *topic, const char *data, int qos, int retain)
 #endif
 }
 
+void Mqtt_Publish_Float(const char *topic, float value, int qos, int retain)
+{
+    if (!g_Mqtt_Client) {
+#if MQTT_DEBUG_ENABLED == STD_ON
+        ESP_LOGE(g_TAG, "MQTT client not initialized");
+#endif
+        return;
+    }
+
+    char buffer[32];
+    snprintf(buffer, sizeof(buffer), "%.4f",  value);
+    
+    esp_mqtt_client_publish(g_Mqtt_Client, topic, buffer, 0, qos, retain);
+
+#if MQTT_DEBUG_ENABLED == STD_ON
+    ESP_LOGI(g_TAG, "Published float to %s: %s", topic, buffer);
+#endif
+}
+
+void Mqtt_Publish_Int(const char *topic, int value, int qos, int retain)
+{
+    if (!g_Mqtt_Client) {
+#if MQTT_DEBUG_ENABLED == STD_ON
+        ESP_LOGE(g_TAG, "MQTT client not initialized");
+#endif
+        return;
+    }
+
+    char buffer[32];
+    snprintf(buffer, sizeof(buffer), "%d",  value);
+    
+    esp_mqtt_client_publish(g_Mqtt_Client, topic, buffer, 0, qos, retain);
+
+#if MQTT_DEBUG_ENABLED == STD_ON
+    ESP_LOGI(g_TAG, "Published float to %s: %s", topic, buffer);
+#endif
+}
+
 void Mqtt_Subscribe(const char *topic, int qos)
 {
     if (!g_Mqtt_Client) {
@@ -142,6 +180,7 @@ void Mqtt_Subscribe(const char *topic, int qos)
     ESP_LOGI(g_TAG, "Subscribed to %s", topic);
 #endif
 }
+
 
 void Mqtt_SetDataCallback(Mqtt_DataCallback callback)
 {

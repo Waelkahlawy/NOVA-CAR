@@ -25,11 +25,12 @@ typedef struct {
 extern "C" {
 #endif
 // Function prototypes
-void Imu_Init(void);                                                        // Initialize IMU sensor                    
-void Imu_Main(Imu_DataType *data);                                          // Main IMU data acquisition function
-int Imu_ReadAccel(int16_t *accel_x, int16_t *accel_y, int16_t *accel_z);    // Read accelerometer data
-int Imu_ReadGyro(int16_t *gyro_x, int16_t *gyro_y, int16_t *gyro_z);        // Read gyroscope data
-int Imu_ReadTemp(float *temperature);                                       // Read temperature data
+void Imu_Init(const uint32_t Imu_Addr);                                                        // Initialize IMU sensor                    
+void Imu_Main(Imu_DataType *data ,const uint32_t Imu_Addr);
+int Imu_ReadAccel( const uint32_t Imu_Addr , int16_t *accel_x, int16_t *accel_y, int16_t *accel_z);
+
+int Imu_ReadGyro( const uint32_t Imu_Addr , int16_t *gyro_x, int16_t *gyro_y, int16_t *gyro_z);      // Read gyroscope data
+int Imu_ReadTemp(  const uint32_t Imu_Addr, float *temperature);
 float Imu_GetGyroMagnitude(void);                                           // Get gyroscope magnitude
 float Imu_GetAccelMagnitude(void);                                          // Get accelerometer magnitude                
 

@@ -10,14 +10,14 @@ static const char *g_TAG = TAG_IMU;
 
 
 
-void Imu_Init(void)
+void Imu_Init( const uint32_t Imu_Addr )
 {
     uint8_t g_who_am_i;
     uint8_t g_reg;
 
     // Read WHO_AM_I register to verify device
     g_reg = MPU6050_WHO_AM_I;
-    I2c_WriteRead(MPU6050_ADDR, &g_reg, 1, &g_who_am_i, 1);
+    I2c_WriteRead(Imu_Addr, &g_reg, 1, &g_who_am_i, 1);
 #if IMU_DEBUG_ENABLED == STD_ON
     if (g_who_am_i == 0x68) {
         ESP_LOGI(g_TAG, "MPU6050 detected (WHO_AM_I: 0x%02X)", g_who_am_i);
@@ -29,7 +29,7 @@ void Imu_Init(void)
 
     // Wake up MPU6050 (clear sleep bit in PWR_MGMT_1)
     uint8_t wake_up[] = {MPU6050_PWR_MGMT_1, 0x00};
-    I2c_Write(MPU6050_ADDR, wake_up, 2);
+    I2c_Write(Imu_Addr, wake_up, 2);
 
 #if IMU_DEBUG_ENABLED == STD_ON
     ESP_LOGI(g_TAG, "MPU6050 Initialized");
@@ -37,14 +37,14 @@ void Imu_Init(void)
 
 }
 
-void Imu_Main(Imu_DataType *data)
+void Imu_Main(Imu_DataType *data ,const uint32_t Imu_Addr)
 {
 
     uint8_t g_raw_data[14];
     uint8_t g_reg = MPU6050_ACCEL_XOUT_H;
 
     // Read all sensor data (14 bytes: accel + temp + gyro)
-    I2c_WriteRead(MPU6050_ADDR, &g_reg, 1, g_raw_data, 14);
+    I2c_WriteRead(Imu_Addr, &g_reg, 1, g_raw_data, 14);
     // Parse accelerometer data
     data->accel_x = (int16_t)((g_raw_data[0] << 8) | g_raw_data[1]);
     data->accel_y = (int16_t)((g_raw_data[2] << 8) | g_raw_data[3]);
@@ -81,14 +81,14 @@ void Imu_Main(Imu_DataType *data)
 
 }
 
-int Imu_ReadAccel(int16_t *accel_x, int16_t *accel_y, int16_t *accel_z)
+int Imu_ReadAccel( const uint32_t Imu_Addr , int16_t *accel_x, int16_t *accel_y, int16_t *accel_z)
 {
 
     uint8_t g_raw_data[6];
     uint8_t g_reg = MPU6050_ACCEL_XOUT_H;
 
     // Read accelerometer data (6 bytes)
-    if (I2c_WriteRead(MPU6050_ADDR, &g_reg, 1, g_raw_data, 6) != 0) {
+    if (I2c_WriteRead(Imu_Addr, &g_reg, 1, g_raw_data, 6) != 0) {
         return -1;
     }
 
@@ -105,14 +105,14 @@ int Imu_ReadAccel(int16_t *accel_x, int16_t *accel_y, int16_t *accel_z)
 
 }
 
-int Imu_ReadGyro(int16_t *gyro_x, int16_t *gyro_y, int16_t *gyro_z)
+int Imu_ReadGyro( const uint32_t Imu_Addr , int16_t *gyro_x, int16_t *gyro_y, int16_t *gyro_z)
 {
 
     uint8_t g_raw_data[6];
     uint8_t g_reg = MPU6050_GYRO_XOUT_H;
 
     // Read gyroscope data (6 bytes)
-    if (I2c_WriteRead(MPU6050_ADDR, &g_reg, 1, g_raw_data, 6) != 0) {
+    if (I2c_WriteRead(Imu_Addr, &g_reg, 1, g_raw_data, 6) != 0) {
         return -1;
     }
 
@@ -129,14 +129,14 @@ int Imu_ReadGyro(int16_t *gyro_x, int16_t *gyro_y, int16_t *gyro_z)
 
 }
 
-int Imu_ReadTemp(float *temperature)
+int Imu_ReadTemp(  const uint32_t Imu_Addr, float *temperature)
 {
 
     uint8_t g_raw_data[2];
     uint8_t g_reg = MPU6050_TEMP_OUT_H;
 
     // Read temperature data (2 bytes)
-    if (I2c_WriteRead(MPU6050_ADDR, &g_reg, 1, g_raw_data, 2) != 0) {
+    if (I2c_WriteRead(Imu_Addr, &g_reg, 1, g_raw_data, 2) != 0) {
         return -1;
     }
 
@@ -152,56 +152,53 @@ int Imu_ReadTemp(float *temperature)
 
 }
 
-float Imu_GetGyroMagnitude(void)
-{
-    // Read gyroscope data
-    int16_t gx, gy, gz;
-    if (Imu_ReadGyro(&gx, &gy, &gz) != 0) {
-        return 0.0f;
-    }
+// float Imu_GetGyroMagnitude(void)
+// {
+//     // Read gyroscope data
+//     int16_t gx, gy, gz;
+//     if (Imu_ReadGyro(&gx, &gy, &gz) != 0) {
+//         return 0.0f;
+//     }
 
-    // Calculate magnitude: sqrt(x² + y² + z²)
-    float magnitude = sqrtf((float)(gx * gx + gy * gy + gz * gz));
+//     // Calculate magnitude: sqrt(x² + y² + z²)
+//     float magnitude = sqrtf((float)(gx * gx + gy * gy + gz * gz));
 
-#if IMU_DEBUG_ENABLED == STD_ON
-    ESP_LOGI(g_TAG, "Gyro Magnitude: %.2f", magnitude);
-#endif
+// #if IMU_DEBUG_ENABLED == STD_ON
+//     ESP_LOGI(g_TAG, "Gyro Magnitude: %.2f", magnitude);
+// #endif
 
-    return magnitude;
+//     return magnitude;
 
-}
+// }
 
 
-float Imu_GetAccelMagnitude(void)
-{
+// float Imu_GetAccelMagnitude(void)
+// {
 
-    // Read accelerometer data
-    int16_t ax, ay, az;
-    if (Imu_ReadAccel(&ax, &ay, &az) != 0) {
-        return 0.0f;
-    }
+//     // Read accelerometer data
+//     int16_t ax, ay, az;
+//     if (Imu_ReadAccel(&ax, &ay, &az) != 0) {
+//         return 0.0f;
+//     }
 
-    // Calculate magnitude: sqrt(x² + y² + z²)
-    float magnitude = sqrtf((float)(ax * ax + ay * ay + az * az));
+//     // Calculate magnitude: sqrt(x² + y² + z²)
+//     float magnitude = sqrtf((float)(ax * ax + ay * ay + az * az));
 
-#if IMU_DEBUG_ENABLED == STD_ON
-    ESP_LOGI(g_TAG, "Accel Magnitude: %.2f", magnitude);
-#endif
+// #if IMU_DEBUG_ENABLED == STD_ON
+//     ESP_LOGI(g_TAG, "Accel Magnitude: %.2f", magnitude);
+// #endif
 
-    return magnitude;
+//     return magnitude;
 
-}
+// }
 
 #else  
 
-void Imu_Init(void)
-{
-    // Do nothing
-}
+void Imu_Init(const uint32_t Imu_Addr){
 
-void Imu_Main(Imu_DataType *data)
-{
-    // Do nothing
+}                                                      // Initialize IMU sensor                    
+void Imu_Main(Imu_DataType *data ,const uint32_t Imu_Addr){
+
 }
 
 int Imu_ReadAccel(int16_t *accel_x, int16_t *accel_y, int16_t *accel_z)

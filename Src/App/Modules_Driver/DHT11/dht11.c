@@ -29,60 +29,68 @@ void Dht11_Init(void)
     Gpio_InitPin(&g_Dht11_PinConfig);
 
 #if DHT11_DEBUG_ENABLED == STD_ON
-    ESP_LOGI(TAG, "✅ DHT11 initialized on GPIO%d", DHT11_GPIO_PIN);
+    ESP_LOGI(TAG, "DHT11 initialized on GPIO%d", DHT11_GPIO_PIN);
 #endif
 }
 
 int Dht11_Main(Dht11_DataType *data)
 {
-
     uint8_t raw_data[5] = {0};
     int retry = DHT11_MAX_RETRIES;
 
     while (retry--) {
+        // ==========================================
+        // CRITICAL: Disable ALL interrupts during timing-sensitive operations
+        // ==========================================
+        portMUX_TYPE mux = portMUX_INITIALIZER_UNLOCKED;
+        portENTER_CRITICAL(&mux);  // LOCK: No interrupts allowed!
+
         // Send start signal to DHT11
-            g_Dht11_PinConfig.pin_mode = GPIO_MODE_OUTPUT;
+        g_Dht11_PinConfig.pin_mode = GPIO_MODE_OUTPUT;
         Gpio_InitPin(&g_Dht11_PinConfig);           // Set as output
 
         g_Dht11_PinConfig.pin_value = LOW;
         Gpio_WritePinValue(&g_Dht11_PinConfig);     // Low
+        
+        // Exit critical section for long delay (allow interrupts during sleep)
+        portEXIT_CRITICAL(&mux);  //  UNLOCK
         vTaskDelay(pdMS_TO_TICKS(20));              
+        portENTER_CRITICAL(&mux);  // LOCK again
 
         g_Dht11_PinConfig.pin_value = HIGH;
         Gpio_WritePinValue(&g_Dht11_PinConfig);     // High
-        Dht11_DelayUs(50);                         // 30-50µs high
-
+        Dht11_DelayUs(40);                          // 30-50µs high
+        
         g_Dht11_PinConfig.pin_mode = GPIO_MODE_INPUT;
         Gpio_InitPin(&g_Dht11_PinConfig);           // Switch to input
 
-        
         // Wait for DHT11 response
         int timeout = 0;
-        while (Gpio_ReadPinValue(DHT11_GPIO_PIN)  == 1 && timeout++ < 100) {
+        while (Gpio_ReadPinValue(DHT11_GPIO_PIN) == 1 && timeout++ < 200) {
             Dht11_DelayUs(1);
         }
         
         timeout = 0;
-        while (Gpio_ReadPinValue(DHT11_GPIO_PIN)  == 0 && timeout++ < 100) {
+        while (Gpio_ReadPinValue(DHT11_GPIO_PIN) == 0 && timeout++ < 200) {
             Dht11_DelayUs(1);
         }
         
         timeout = 0;
-        while (Gpio_ReadPinValue(DHT11_GPIO_PIN)  == 1 && timeout++ < 100) {
+        while (Gpio_ReadPinValue(DHT11_GPIO_PIN) == 1 && timeout++ < 200) {
             Dht11_DelayUs(1);
         }
 
-        // Read 40 bits of data
+        // Read 40 bits of data (CRITICAL: Must not be interrupted!)
         for (int i = 0; i < 40; i++) {
             timeout = 0;
-            while (Gpio_ReadPinValue(DHT11_GPIO_PIN)  == 0 && timeout++ < 200) {
+            while (Gpio_ReadPinValue(DHT11_GPIO_PIN) == 0 && timeout++ < 200) {
                 Dht11_DelayUs(1);
             }
             
             uint64_t start = esp_timer_get_time();
             
             timeout = 0;
-            while (Gpio_ReadPinValue(DHT11_GPIO_PIN)  == 1 && timeout++ < 200) {
+            while (Gpio_ReadPinValue(DHT11_GPIO_PIN) == 1 && timeout++ < 200) {
                 Dht11_DelayUs(1);
             }
             
@@ -94,6 +102,11 @@ int Dht11_Main(Dht11_DataType *data)
                 raw_data[i / 8] |= 1;
             }
         }
+
+        // ==========================================
+        // Re-enable interrupts after timing-sensitive section
+        // ==========================================
+        portEXIT_CRITICAL(&mux);  //  UNLOCK: Interrupts allowed again
 
         // Verify checksum
         uint8_t checksum = (raw_data[0] + raw_data[1] + raw_data[2] + raw_data[3]) & 0xFF;
