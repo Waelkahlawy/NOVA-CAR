@@ -1,6 +1,6 @@
 [default]
   url = "http://localhost:8086"
-  token = "my-super-secret-auth-token"
+  token = "nova_car"
   org = "nova_car"
   active = true
 # 
