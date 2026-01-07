@@ -22,6 +22,9 @@
 #define TAG_GPS                         "GPS_DRIVER"
 #define TAG_PREDICTIVE_MAINTENANCE      "GPS_DRIVER"
 #define TAG_SENSOR_FUSION               "SENSOR_FUSION"
+#define TAG_FOTA                        "FOTA_UPDATE"
+#define TAG_FOTA_TASK                    "FOTA_UPDATE_TASK"
+
          
 //------------------Enable or disable Hal drivers------------//
 #define GPIO_ENABLED                    STD_ON
@@ -40,6 +43,8 @@
 #define GSM_ENABLED                     STD_ON
 #define PREDICTIVE_MAINTENANCE_ENABLED  STD_ON
 #define SENSOR_FUSION_ENABLED           STD_ON
+#define FOTA_ENABLED                    STD_ON
+
 
 //------------------Configuration & Debugging Options APP Drivers------------//
 
@@ -143,6 +148,17 @@
 #define GSM_BUF_SIZE            1024
 
 #endif
+
+#if FOTA_ENABLED == STD_ON
+#define FOTA_SERVER_URL         "http://18.197.149.97:8080"
+#define FOTA_VERSION_URL        FOTA_SERVER_URL "/firmware/version.json"
+#define FOTA_CURRENT_VERSION    "1.0.0"
+#define FOTA_DEBUG_ENABLED      STD_ON
+
+#endif
+
+
+
 //------------------Configuration & Debugging Options HAL Drivers------------//
 
 // WIFI Configuration & Debugging
@@ -229,6 +245,10 @@
 #define ESP1_SUB_GSM                "GSM"
 #define ESP1_SUB_PREDICTION         "Prediction_Maintenance"
 #define ESP2_SUB_CV_DRIVER          "CV_Driver"
+#define ESP1_SUB_FOTA               "FOTA_Update"
+
+
+
 
 #define MQTT_TOPIC_ESP1_CABIN_TEMP              ESP_CLIENT_ID "/" ESP1_NODE_ID "/" ESP1_SUB_CABIN_DH11 "/temperature"
 #define MQTT_TOPIC_ESP1_CABIN_HUMIDITY          ESP_CLIENT_ID "/" ESP1_NODE_ID "/" ESP1_SUB_CABIN_DH11 "/humidity"
@@ -247,6 +267,9 @@
 #define MQTT_TOPIC_ESP1_ULTRASONIC_ALARM        ESP_CLIENT_ID "/" ESP1_NODE_ID "/" ESP1_SUB_ULTRASONIC "/alarm_status"
 #define MQTT_TOPIC_ESP1_GPS_T_STAMP             ESP_CLIENT_ID "/" ESP1_NODE_ID "/" ESP1_SUB_GPS "/time_stamp"
 #define MQTT_TOPIC_ESP1_PREDICTION_ENG_ALART    ESP_CLIENT_ID "/" ESP1_NODE_ID "/" ESP1_SUB_PREDICTION "/alart"  
+#define MQTT_TOPIC_ESP1_FOTA_UPDATE_CHECK       ESP_CLIENT_ID "/" ESP1_NODE_ID "/" ESP1_SUB_FOTA "/check"  
+#define MQTT_TOPIC_ESP1_FOTA_UPDATE_STATUS      ESP_CLIENT_ID "/" ESP1_NODE_ID "/" ESP1_SUB_FOTA "/status"  
+
 
 
 #define  MQTT_TOPIC_ESP2_CV_CONFIDENCE           ESP_CLIENT_ID "/" ESP2_NODE_ID "/" ESP2_SUB_CV_DRIVER "/confidence"

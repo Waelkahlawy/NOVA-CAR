@@ -12,6 +12,8 @@
 #include "../../Services/AggregateTask/aggregate_task.h"
 #include "../../Services/SensorTask/SENSOR_FUSION_TASK/sensor_fusion_task.h"
 #include "../../Services/SensorTask/PREDICTIVE_MAINTENANCE_TASK/predictive_maintenance_task.h"
+#include "../../Services/SensorTask/FOTA_TASK/fota_task.h"
+
 
 
 /* ================= Include driver Headers ================= */
@@ -92,6 +94,8 @@ void RTOS_Manager_Init(void)
     Predictive_Maintenance_Init();
     Fusion_Init();
     Ultrasonic_Init(&Ultrasonic_Config);
+    Fota_Init();
+
 
     //task create
     /* ---------- Create Tasks ---------- */
@@ -115,5 +119,8 @@ void RTOS_Manager_Init(void)
     xTaskCreate(Sensor_Fusion_Task,"Fusion_Task",4096, NULL, 4, NULL);
 
     xTaskCreate(Predictive_Maintenance_Task,"PredMaint_Task", 8192, NULL, 4, NULL);
+
+    xTaskCreate(Fota_Task, "FOTA_Task", 4096, NULL, 5, NULL);
+
 
 }
