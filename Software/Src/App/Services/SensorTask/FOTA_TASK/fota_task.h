@@ -4,6 +4,7 @@
 
 
 void Fota_MqttCallback(const char *topic, const char *data);
+void Fota_Task(void *pvParameters);
 
 
 
