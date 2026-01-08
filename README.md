@@ -33,19 +33,9 @@ The system transforms a standard vehicle into an intelligent, connected platform
 - Real-Time Multitasking  
   Efficient task management using FreeRTOS on ESP32
   
-## Firmware Over-The-Air (FOTA)
-NOVA supports secure Firmware Over-The-Air (FOTA) updates, enabling remote firmware
-upgrades without physical access to the vehicle.
-
-Key capabilities include:
-- Dual-partition OTA scheme for safe updates
-- MQTT-based update triggering
-- HTTPS-encrypted firmware download
-- Automatic rollback on failed updates
-- Version-controlled deployments
-
-This ensures continuous improvement, rapid bug fixing, and security patching
-throughout the vehicle lifecycle.
+- Firmware Over-The-Air (FOTA) Updates  
+  Secure remote firmware updates using MQTT-triggered OTA and HTTPS download,
+  enabling bug fixes, feature enhancements, and ML model updates without physical access.
 
 ## Hardware Components
 
@@ -109,9 +99,14 @@ flowchart LR
     MQTT -->|"FOTA Trigger"| ESP32
     OTA -->|"HTTPS Firmware Image"| ESP32
 
+    style External fill:#f0f8ff,stroke:#333,stroke-width:2px
     style OTA fill:#fff5e6,stroke:#ff9900,stroke-width:2px
-    style ESP32 fill:#e6f3ff,stroke:#0066cc,stroke-width:3px
+    style ESP32 fill:#e6f3ff,stroke:#0066cc,stroke-width:3px,color:#000
+    style Hardware fill:#fff0f0,stroke:#cc0000,stroke-width:2px
 ```
+The system architecture includes a secure Firmware Over-The-Air (FOTA) mechanism.
+Firmware updates are triggered via MQTT and downloaded securely over HTTPS from
+a dedicated OTA server using a dual-partition update strategy.
 
 ## Machine Learning Models
 
