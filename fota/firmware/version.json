@@ -1,9 +1,0 @@
-{
-  "version": "1.0.0",
-  "url": "http://18.197.149.97:8080/firmware/nova-v1.0.0.bin",
-  "size": 0,
-  "md5": "",
-  "release_notes": "Initial version",
-  "mandatory": false,
-  "min_version": "1.0.0"
-}
