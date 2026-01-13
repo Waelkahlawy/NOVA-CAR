@@ -56,6 +56,5 @@
   "C_Cpp_Runner.showCompilationTime": false,
   "C_Cpp_Runner.useLinkTimeOptimization": false,
   "C_Cpp_Runner.msvcSecureNoWarnings": false,
-  "idf.portWin": "COM6",
-  "idf.flashType": "UART"
+  "cmake.sourceDirectory": "D:/GitHub Projects/NOVA-CAR/Software/managed_components/espressif__esp-nn"
 }
